@@ -1,5 +1,7 @@
 echo "Installing window-title-applet"
-rm -rf ~/.local/share/plasma/plasmoids/org.kde.windowtitle
-cp -r ./ ~/.local/share/plasma/plasmoids/org.kde.windowtitle
-systemctl --user restart plasma-plasmashell
+DEST=~/.local/share/plasma/plasmoids/org.kde.windowtitle
+rm -rf "$DEST"
+mkdir -p "$DEST"
+cp -r contents metadata.json "$DEST"
+kquitapp6 plasmashell && kstart6 plasmashell
 echo "Installed window-title-applet"
