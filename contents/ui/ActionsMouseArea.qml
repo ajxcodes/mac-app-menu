@@ -1,7 +1,10 @@
 import QtQuick
 import org.kde.plasma.core
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.plasma.plasma5support as Plasma5Support
+import QtQuick.Controls as Controls
+import org.kde.plasma.extras as PlasmaExtras
 
 MouseArea {
     id: actionsArea
@@ -9,9 +12,25 @@ MouseArea {
     anchors.fill: parent
     property bool wheelIsBlocked: false
     onClicked: function(event){
-        if(existsWindowActive && event.button === Qt.MiddleButton && cfg.closeAllowed)
+        if(existsWindowActive && event.button === Qt.MiddleButton && cfg.closeAllowed) {
             windowInfoLoader.item.requestClose();
+        } else if (existsWindowActive && event.button === Qt.LeftButton && cfg.leftClickMenu) {
+            root.macAppMenuPopup.open();
+        }
     }
+
+    Rectangle {
+        anchors.fill: parent
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+        anchors.leftMargin: Kirigami.Units.smallSpacing
+        anchors.rightMargin: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.smallSpacing
+        color: Kirigami.Theme.textColor
+        visible: root.macAppMenuPopup.status === PlasmaExtras.Menu.Open
+        opacity: 0.15
+    }
+
     onDoubleClicked: {
         if(existsWindowActive && cfg.maxminAllowed)
             windowInfoLoader.item.toggleMaximized();
@@ -58,4 +77,6 @@ MouseArea {
         interval: 200
         onTriggered: actionsArea.wheelIsBlocked = false;
     }
+
+
 }
