@@ -7,7 +7,6 @@ import "../tools/Tools.js" as Tools
 
 GridLayout {
     columns: isVertical?1:6
-    anchors.fill: parent
     rowSpacing: 0
     columnSpacing: 0
     Layout.maximumWidth: parent.width
@@ -70,10 +69,5 @@ GridLayout {
                 pixelSize           : cfg.fontSize
             }
         }
-    }
-    CItem {length:cfg.lastSpace}
-    Item {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
     }
 }

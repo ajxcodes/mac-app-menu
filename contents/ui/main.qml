@@ -121,7 +121,8 @@ PlasmoidItem {
     }
     Title { 
         id: titleLayout
-        onImplicitWidthChanged: root.titleImplicitWidth = implicitWidth
+        anchors.centerIn: parent
+        onImplicitWidthChanged: root.titleImplicitWidth = implicitWidth + (Kirigami.Units.smallSpacing * 4)
         onImplicitHeightChanged: root.titleImplicitHeight = implicitHeight
     }
     ActionsMouseArea {}
